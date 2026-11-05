@@ -20,12 +20,14 @@ export const books = [
     id: "slave-boss",
     mockup: { src: "/books/mockups/slave-boss.png", width: 1254, height: 1254 },
     title: "Slave Boss",
+    subtitle: "How I became a slave in my company",
     href: "https://www.amazon.com/gp/product/B0DCGCFGNT",
   },
   {
     id: "the-flags",
     mockup: { src: "/books/mockups/the-flags.png", width: 1254, height: 1254 },
     title: "The Flags",
+    subtitle: "So you never call red flags love again",
     href: "https://www.amazon.com/Flags-Bukky-Anny-ebook/dp/B0GZ6YTQCF",
   },
   {
@@ -36,6 +38,7 @@ export const books = [
       height: 1254,
     },
     title: "A Safe Place",
+    subtitle: "A journey to healing, truth, & tenderness",
     href: "https://www.amazon.com/gp/product/B0GZ6GSY5X",
   },
   {
@@ -46,6 +49,7 @@ export const books = [
       height: 1254,
     },
     title: "Bond Not Blood",
+    subtitle: null,
     href: "https://www.amazon.com/gp/product/B0GZ68MG1L",
   },
 ] as const;

@@ -256,6 +256,12 @@
   @apply h-full w-full object-contain;
   transition: transform 400ms ease-in-out;
 }
+.book-catalogue .books-grid {
+  row-gap: 20px;
+}
+.book-catalogue .book-cover {
+  object-fit: cover;
+}
 .book-action {
   @apply absolute flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black opacity-0;
   transition: opacity 400ms ease-in-out;
@@ -271,6 +277,31 @@
 
 .section-introduction {
   @apply flex items-end justify-between gap-8;
+}
+.book-detail-header {
+  @apply grid items-start lg:grid-cols-2;
+}
+.book-detail-cover {
+  @apply relative aspect-square w-full overflow-hidden rounded-sm;
+}
+.book-detail-content {
+  @apply flex w-full max-w-2xl flex-col gap-10 justify-self-center;
+  padding: var(--section-space) var(--gutter);
+}
+@media (min-width: 1024px) {
+  .book-detail-cover {
+    aspect-ratio: auto;
+    height: 100svh;
+  }
+  .book-detail-content {
+    padding-top: 120px;
+  }
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .book-detail-cover {
+    position: sticky;
+    top: 0;
+  }
 }
 .business-row {
   @apply grid items-center gap-6 border-b px-2 py-8 transition-colors hover:bg-accent hover:text-white focus-visible:bg-accent focus-visible:text-white;

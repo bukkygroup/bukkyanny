@@ -21,11 +21,9 @@ export function FeaturedBook() {
             </div>
           </div>
           <Link
-            href={books[0].href}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={`/books/${books[0].id}`}
             className="featured-art"
-            aria-label="Explore Slave Boss on Amazon (opens in a new tab)"
+            aria-label="Read about Slave Boss"
           >
             <svg
               className="shape-definitions"
