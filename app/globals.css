@@ -1,26 +1,677 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-heading: var(--font-geist-sans);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+}
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #080808;
+  --primary: #e10616;
+  --primary-foreground: #ffffff;
+  --secondary: #ffffff;
+  --secondary-foreground: #080808;
+  --muted: #eeeeee;
+  --muted-foreground: #666666;
+  --accent: #e10616;
+  --accent-foreground: #ffffff;
+  --popover: #080808;
+  --popover-foreground: #ffffff;
+  --border: #bfc0c2;
+  --input: #eeeeee;
+  --ring: #e10616;
+  --destructive: #b91c1c;
+  --gutter: 48px;
+  --section-space: 96px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 32px;
+  }
+  body {
+    @apply bg-background font-sans text-base text-foreground;
+  }
+  button:not(:disabled),
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+  a,
+  button {
+    touch-action: manipulation;
+  }
+  a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 5px;
+    border-radius: 2px;
+  }
+  main[tabindex="-1"],
+  section[tabindex="-1"],
+  header[tabindex="-1"],
+  footer[tabindex="-1"] {
+    outline: none;
+  }
+  ::selection {
+    background: #e10616;
+    color: #ffffff;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.page-container {
+  @apply mx-auto w-full;
+  max-width: 1280px;
+}
+.section-pad {
+  padding: var(--section-space) var(--gutter);
+}
+.section-label {
+  @apply text-sm font-semibold;
+}
+.section-title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+.skip-link {
+  @apply fixed left-4 top-4 z-[100] rounded-full bg-white px-5 py-3 text-sm font-semibold text-black;
+  transform: translateY(-200%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.home-anchor {
+  height: 0;
+  outline: none;
+}
+.hero {
+  @apply sticky top-0 bg-[#080808] text-white;
+  height: 100svh;
+  min-height: 600px;
+  padding: 40px var(--gutter) 56px;
+}
+.hero-inner {
+  @apply flex h-full flex-col justify-between gap-6;
+}
+.hero-name {
+  font-size: 200px;
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+.hero-name-line {
+  @apply block;
+}
+.hero-letter {
+  @apply inline-block;
+}
+.hero-baseline {
+  @apply flex items-end justify-between gap-8;
+}
+.hero-subtitle {
+  @apply max-w-lg text-2xl font-bold;
+  line-height: 1.2;
+}
+.hero-down {
+  @apply shrink-0 rounded-full border-white/20 bg-transparent text-white hover:bg-white hover:text-black;
+}
+.home-content {
+  @apply relative z-10 bg-white;
+}
+
+.site-menu-trigger {
+  @apply fixed top-6 z-40 h-11 rounded-xl border-white/15 bg-[#080808] px-5 text-sm font-semibold text-white hover:bg-[#212121] hover:text-white;
+  right: var(--gutter);
+}
+.site-menu-panel {
+  @apply flex flex-col gap-6 rounded-xl bg-[#080808] p-5 text-white;
+  top: 24px;
+  right: var(--gutter);
+  width: 224px;
+  max-height: calc(100svh - 48px);
+  overflow-y: auto;
+}
+.menu-close {
+  @apply absolute right-3 top-2 px-2 text-sm text-white hover:bg-white/10 hover:text-white;
+}
+.menu-links {
+  @apply flex flex-col items-start gap-1;
+}
+.menu-links a {
+  @apply flex min-h-11 items-center text-base font-semibold;
+}
+
+.biography-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 640px);
+  gap: 64px;
+}
+.biography-content {
+  @apply flex min-w-0 flex-col gap-24;
+}
+.biography-intro {
+  font-size: 35px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.biography-description {
+  @apply text-lg leading-relaxed text-gray-600;
+}
+.book-index {
+  @apply flex flex-col gap-10;
+}
+.book-index-row {
+  @apply flex min-h-24 items-center justify-between gap-4 border-b px-2 text-lg transition-colors hover:bg-accent hover:text-white focus-visible:bg-accent focus-visible:text-white;
+}
+.book-index-row svg {
+  @apply shrink-0 opacity-0 transition-opacity;
+}
+.book-index-row:hover svg,
+.book-index-row:focus-visible svg {
+  @apply opacity-100;
+}
+
+.brand-strip {
+  padding: 0 var(--gutter);
+}
+.brand-mark {
+  @apply relative flex h-32 w-44 shrink-0 items-center justify-center overflow-hidden rounded-md;
+}
+.brand-image {
+  @apply object-contain;
+}
+
+.featured-book {
+  @apply grid grid-cols-2 items-center gap-16 rounded-sm bg-[#080808] p-12 text-white;
+}
+.featured-copy {
+  @apply flex h-full flex-col justify-between gap-16;
+}
+.featured-copy p {
+  @apply text-lg leading-relaxed text-gray-300;
+}
+.featured-art {
+  @apply relative flex aspect-square items-center justify-center;
+}
+.featured-studio {
+  @apply h-full w-full object-cover;
+  transition: transform 400ms ease-in-out;
+  clip-path: url(#book-silhouette);
+}
+.featured-art:is(:hover, :focus-visible) .featured-studio {
+  transform: scale(1.015);
+}
+
+.books-grid {
+  @apply grid grid-cols-3 gap-x-5 gap-y-12;
+}
+.book-card {
+  @apply flex min-w-0 flex-col gap-3;
+  scroll-margin-top: 32px;
+}
+.book-caption {
+  @apply flex flex-col gap-3 rounded-sm px-2 py-3;
+}
+.book-stage {
+  @apply relative flex w-full items-center justify-center overflow-hidden rounded-sm;
+  aspect-ratio: 0.865;
+}
+.book-cover {
+  @apply h-full w-full object-contain;
+  transition: transform 400ms ease-in-out;
+}
+.book-action {
+  @apply absolute flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-black opacity-0;
+  transition: opacity 400ms ease-in-out;
+}
+.book-card:hover .book-cover,
+.book-card:focus-visible .book-cover {
+  transform: scale(1.04);
+}
+.book-card:hover .book-action,
+.book-card:focus-visible .book-action {
+  @apply opacity-100;
+}
+
+.section-introduction {
+  @apply flex items-end justify-between gap-8;
+}
+.business-row {
+  @apply grid items-center gap-6 border-b px-2 py-8 transition-colors hover:bg-accent hover:text-white focus-visible:bg-accent focus-visible:text-white;
+  grid-template-columns: minmax(120px, 1fr) minmax(0, 3fr) 24px;
+}
+.business-category {
+  @apply w-fit rounded-full bg-[#080808] px-3 py-1 text-sm font-semibold text-white;
+}
+.business-row h3 {
+  @apply text-2xl font-semibold;
+}
+.business-row svg {
+  @apply transition-transform;
+}
+.business-row:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.testimonials-section {
+  @apply overflow-hidden bg-[#080808] text-white;
+}
+.testimonial-arrow {
+  @apply rounded-full border-white/25 bg-transparent text-white hover:bg-primary hover:text-white;
+}
+.testimonials-viewport {
+  @apply overflow-hidden;
+  touch-action: pan-y pinch-zoom;
+}
+.testimonials-track {
+  @apply flex gap-6;
+}
+.testimonial-slide {
+  flex: 0 0 calc((100% - 48px) / 3);
+  min-width: 0;
+}
+.testimonial-card {
+  @apply flex h-full min-h-80 flex-col justify-between gap-10 rounded-xl border border-white/10 bg-[#171717] p-8;
+}
+
+.media-project {
+  @apply flex items-center justify-between gap-4 border-b px-2 py-6;
+}
+.media-project h3 {
+  @apply text-xl font-semibold;
+}
+.media-project > span:not(.sr-only) {
+  @apply shrink-0 text-xs text-gray-600;
+}
+.media-project {
+  transition:
+    color 400ms ease-in-out,
+    background-color 400ms ease-in-out;
+}
+.media-project:is(:hover, :focus-visible) {
+  @apply bg-primary text-white;
+}
+.media-project > span:not(.sr-only) {
+  transition: color 400ms ease-in-out;
+}
+.media-project:is(:hover, :focus-visible) > span:not(.sr-only) {
+  @apply text-white;
+}
+
+.site-footer {
+  @apply relative z-10 bg-[#080808] text-white;
+  padding: 80px var(--gutter) 32px;
+}
+.footer-grid {
+  @apply grid gap-12;
+  grid-template-columns: 1fr 1fr 2fr;
+}
+.footer-links {
+  @apply flex flex-col items-start gap-3;
+}
+.footer-links a {
+  @apply text-sm font-semibold;
+}
+.footer-label {
+  @apply text-sm text-gray-400;
+  padding-bottom: 12px;
+}
+.footer-invitation {
+  @apply flex flex-col items-start gap-6;
+}
+.footer-invitation p {
+  @apply text-sm leading-relaxed text-gray-300;
+}
+.footer-bottom {
+  @apply flex items-center justify-between gap-6 border-t border-white/20 pt-6 text-xs text-gray-300;
+}
+
+/* Shared interactions use one timing curve across navigation and content. */
+.site-brand {
+  @apply inline-flex size-20 shrink-0 items-center justify-center;
+  transition:
+    opacity 400ms ease-in-out,
+    transform 400ms ease-in-out;
+}
+.site-brand img {
+  @apply h-full w-full object-contain;
+}
+.site-brand:is(:hover, :focus-visible) {
+  opacity: 0.85;
+  transform: translateY(-2px);
+}
+.site-menu-panel .site-brand {
+  @apply size-16;
+}
+.menu-links a,
+.footer-links a,
+.footer-bottom a,
+.animated-link {
+  position: relative;
+  text-decoration: none;
+  transition: color 400ms ease-in-out;
+}
+.menu-links a::after,
+.footer-links a::after,
+.footer-bottom a::after,
+.animated-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 400ms ease-in-out;
+}
+:is(.menu-links a, .footer-links a, .footer-bottom a, .animated-link):is(
+    :hover,
+    :focus-visible
+  )::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+.book-index-row,
+.business-row,
+.media-link,
+.site-menu-trigger,
+.menu-close,
+.hero-down,
+.testimonial-arrow {
+  transition:
+    color 400ms ease-in-out,
+    background-color 400ms ease-in-out,
+    border-color 400ms ease-in-out;
+}
+a svg:not(.shape-definitions),
+button svg {
+  transition: transform 400ms ease-in-out;
+}
+a:is(:hover, :focus-visible) > svg:not(.shape-definitions),
+[data-slot="button"]:is(:hover, :focus-visible) > svg:not(.shape-definitions) {
+  transform: translate(2px, -2px);
+}
+.hero-down:is(:hover, :focus-visible) > svg {
+  transform: translateY(3px);
+}
+.testimonial-arrow:is(:hover, :focus-visible) > svg {
+  transform: translateX(2px);
+}
+.testimonial-arrow:first-child:is(:hover, :focus-visible) > svg {
+  transform: translateX(-2px);
+}
+.book-index-row svg {
+  transition:
+    opacity 400ms ease-in-out,
+    transform 400ms ease-in-out;
+}
+.business-row:is(:hover, :focus-visible) svg {
+  transform: translate(2px, -2px);
+}
+.business-row:is(:hover, :focus-visible) .business-category {
+  @apply bg-white text-black;
+}
+.business-category {
+  transition:
+    color 400ms ease-in-out,
+    background-color 400ms ease-in-out;
+}
+.site-menu-trigger:is(:hover, :focus-visible),
+.hero-down:is(:hover, :focus-visible),
+.testimonial-arrow:is(:hover, :focus-visible) {
+  @apply border-primary bg-primary text-white;
+}
+.shape-definitions {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.brand-marquee-shell {
+  @apply relative flex flex-col gap-4;
+}
+.brand-static-list {
+  @apply flex flex-wrap items-center justify-center gap-8;
+}
+.brand-moving,
+.brand-pause {
+  display: none;
+}
+.brand-mark {
+  transition:
+    opacity 400ms ease-in-out,
+    transform 400ms ease-in-out;
+}
+.brand-mark:is(:hover, :focus-visible) {
+  opacity: 0.8;
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-moving {
+    display: block;
+  }
+  .brand-moving .brand-mark {
+    margin-inline: 24px;
+  }
+  .brand-pause {
+    display: inline-flex;
+    align-self: flex-end;
+  }
+  .brand-static-list:not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .brand-marquee-shell:has(.brand-static-list:focus-within) .brand-moving {
+    display: none;
+  }
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --gutter: 32px;
+    --section-space: 80px;
+  }
+  .hero-name {
+    font-size: 160px;
+  }
+  .biography-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+    gap: 40px;
+  }
+  .featured-book {
+    gap: 32px;
+    padding: 32px;
+  }
+  .section-title {
+    font-size: 40px;
+  }
+  .books-grid {
+    @apply grid-cols-2;
+  }
+  .testimonial-slide {
+    flex-basis: calc((100% - 24px) / 2);
+  }
+  .section-introduction {
+    @apply items-start;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --gutter: 16px;
+    --section-space: 80px;
+  }
+  .hero {
+    height: 80svh;
+    min-height: 600px;
+    padding-top: 20px;
+    padding-bottom: 56px;
+  }
+  .hero-inner {
+    @apply justify-end;
+  }
+  .hero-name {
+    font-size: 88px;
+  }
+  .hero-baseline {
+    @apply flex-col items-start gap-6;
+  }
+  .hero-subtitle {
+    @apply max-w-xs text-2xl;
+  }
+  .site-menu-trigger {
+    top: 24px;
+    right: 32px;
+  }
+  .site-menu-panel {
+    right: 32px;
+    max-width: calc(100vw - 48px);
+  }
+  .biography-layout {
+    @apply grid-cols-1 gap-10;
+  }
+  .biography-intro {
+    font-size: 32px;
+  }
+  .biography-description {
+    @apply text-base;
+  }
+  .biography-content {
+    @apply gap-16;
+  }
+  .book-index-row {
+    @apply min-h-20 px-2;
+  }
+  .brand-strip {
+    padding-bottom: 40px;
+  }
+  .featured-book {
+    @apply grid-cols-1 gap-10 p-8;
+  }
+  .featured-copy {
+    @apply gap-10;
+  }
+  .featured-copy p {
+    @apply text-base;
+  }
+  .featured-art {
+    @apply w-full;
+  }
+  .section-title {
+    font-size: 36px;
+  }
+  .books-grid {
+    @apply grid-cols-1 gap-12;
+  }
+  .book-action {
+    @apply opacity-100;
+  }
+  .section-introduction {
+    @apply flex-col items-start gap-8;
+  }
+  .business-row {
+    grid-template-columns: minmax(0, 1fr) 24px;
+    @apply gap-x-4 gap-y-3 py-6;
+  }
+  .business-category {
+    @apply col-span-2 text-xs;
+  }
+  .business-row h3 {
+    @apply text-xl;
+  }
+
+  .testimonial-slide {
+    flex-basis: 100%;
+  }
+  .testimonial-card {
+    @apply p-6;
+  }
+  .media-project {
+    @apply flex-wrap;
+  }
+  .media-project h3 {
+    @apply text-lg;
+  }
+  .media-project > span:not(.sr-only) {
+    @apply w-full;
+  }
+  .footer-grid {
+    @apply grid-cols-2 gap-y-12;
+  }
+  .footer-invitation {
+    @apply col-span-2;
+  }
+  .footer-bottom {
+    @apply flex-col items-start;
+  }
+  .site-footer {
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 359px) {
+  .hero-name {
+    font-size: 76px;
+  }
+  .hero-subtitle {
+    @apply text-xl;
+  }
+  .testimonials-section .section-introduction {
+    @apply flex-col;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .hero-letter {
+    color: #ffffff !important;
+  }
+  .hero-subtitle {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal-heading {
+    color: #080808 !important;
+  }
 }
