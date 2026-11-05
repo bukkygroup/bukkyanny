@@ -45,7 +45,7 @@ export function HomeStructuredData() {
         name: book.title,
         author: { "@id": personId },
         url: book.href,
-        ...(siteUrl ? { image: new URL(book.cover, siteUrl).href } : {}),
+        ...(siteUrl ? { image: new URL(book.mockup.src, siteUrl).href } : {}),
       })),
     ],
   };

@@ -18,6 +18,14 @@ export function SiteMenu() {
   const [open, setOpen] = useState(false);
   const destination = useRef<string | null>(null);
 
+  function navigate(href: string) {
+    const url = new URL(href, window.location.href);
+    destination.current = url.pathname === window.location.pathname
+      ? (url.hash ? decodeURIComponent(url.hash.slice(1)) : "main-content")
+      : null;
+    setOpen(false);
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -36,7 +44,7 @@ export function SiteMenu() {
           if (!destination.current) return;
           event.preventDefault();
           document
-            .querySelector<HTMLElement>(destination.current)
+            .getElementById(destination.current)
             ?.focus({ preventScroll: true });
           destination.current = null;
         }}
@@ -45,7 +53,7 @@ export function SiteMenu() {
           Explore Bukky Anny’s world
         </DialogTitle>
         <DialogDescription className="sr-only">
-          Navigate to a section of the homepage.
+          Explore Bukky’s story and navigate to her work, books, and contact details.
         </DialogDescription>
         <DialogClose asChild>
           <Button
@@ -57,22 +65,14 @@ export function SiteMenu() {
           </Button>
         </DialogClose>
         <BrandMark
-          onNavigate={() => {
-            destination.current =
-              window.location.pathname === "/" ? "#home" : null;
-            setOpen(false);
-          }}
+          onNavigate={() => navigate("/#home")}
         />
         <nav aria-label="Main navigation" className="menu-links">
           {navigation.map((item) => (
             <Link
               href={item.href}
               key={item.href}
-              onClick={() => {
-                destination.current =
-                  window.location.pathname === "/" ? item.href.slice(1) : null;
-                setOpen(false);
-              }}
+              onClick={() => navigate(item.href)}
             >
               {item.label}
             </Link>

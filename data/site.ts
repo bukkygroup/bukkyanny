@@ -2,7 +2,7 @@ export const socialUrl = "https://www.instagram.com/iambukkyanny/";
 
 export const navigation = [
   { label: "Home", href: "/#home" },
-  { label: "About", href: "/#about" },
+  { label: "About", href: "/about" },
   { label: "My work", href: "/#businesses" },
   { label: "Books", href: "/#books" },
   { label: "Media", href: "/#media" },

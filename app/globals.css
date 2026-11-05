@@ -145,6 +145,15 @@
 .home-content {
   @apply relative z-10 bg-white;
 }
+.scroll-backdrop {
+  position: relative;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-backdrop {
+    position: sticky;
+    top: var(--backdrop-top, 0px);
+  }
+}
 
 .site-menu-trigger {
   @apply fixed top-6 z-40 h-11 rounded-xl border-white/15 bg-[#080808] px-5 text-sm font-semibold text-white hover:bg-[#212121] hover:text-white;

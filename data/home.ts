@@ -14,24 +14,18 @@ export const homeCopy = {
     "Find me on YouTube through Loud Thoughts with Bukky and Pose Like a Pro with Bukky.",
 } as const;
 
-// Original cover mappings and purchase destinations from Bukky Group's catalogue.
+// Display mockups and purchase destinations from Bukky Group's catalogue.
 export const books = [
   {
     id: "slave-boss",
     mockup: { src: "/books/mockups/slave-boss.png", width: 1254, height: 1254 },
     title: "Slave Boss",
-    cover: "/books/slave-boss.jpeg",
-    width: 1320,
-    height: 1595,
     href: "https://www.amazon.com/gp/product/B0DCGCFGNT",
   },
   {
     id: "the-flags",
     mockup: { src: "/books/mockups/the-flags.png", width: 1254, height: 1254 },
     title: "The Flags",
-    cover: "/books/the-flags.jpeg",
-    width: 1046,
-    height: 1600,
     href: "https://www.amazon.com/Flags-Bukky-Anny-ebook/dp/B0GZ6YTQCF",
   },
   {
@@ -42,9 +36,6 @@ export const books = [
       height: 1254,
     },
     title: "A Safe Place",
-    cover: "/books/a-safe-place.jpeg",
-    width: 1154,
-    height: 1600,
     href: "https://www.amazon.com/gp/product/B0GZ6GSY5X",
   },
   {
@@ -55,9 +46,6 @@ export const books = [
       height: 1254,
     },
     title: "Bond Not Blood",
-    cover: "/books/bond-not-blood.jpeg",
-    width: 1164,
-    height: 1600,
     href: "https://www.amazon.com/gp/product/B0GZ68MG1L",
   },
 ] as const;

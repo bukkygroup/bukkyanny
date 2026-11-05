@@ -35,17 +35,17 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
-## Home review and SEO
+## Home, About, and SEO
 
-Home is the only completed page. Original client copy is preserved in `content/bukky-anny-original.txt`; selected personal excerpts for the future About page are in `content/personal-stories.ts`.
+Home (`/`) and About (`/about`) are implemented for review. Original client copy is preserved in `content/bukky-anny-original.txt`; About renders the complete introduction and eight story sections from `content/about.ts`. The earlier shortened excerpts remain in `content/personal-stories.ts` for reference.
 
 Testimonials are clearly labelled review placeholders, not published endorsements. Replace them with client-approved quotes before launch. YouTube project rows remain informational until their destinations are confirmed.
 
 Copy `.env.example` to `.env.local` and set `SITE_URL` only after the production domain is confirmed. It must be the HTTPS origin, without a path, query, or credentials. Rebuild after changing it.
 
-- With no `SITE_URL`, Home uses `noindex, nofollow`, robots disallows crawling, and the sitemap contains no entries. Absolute canonical and structured-data image URLs are omitted.
+- With no `SITE_URL`, both pages use `noindex, nofollow`, robots disallows crawling, and the sitemap contains no entries. Absolute canonical and structured-data image URLs are omitted.
 - Development and Vercel preview deployments remain non-indexable, including when a production domain is configured.
-- A production build with `SITE_URL` configured permits indexing, publishes the Home canonical URL and sitemap entry, and adds absolute Person, WebSite, and Book references. Other pages must be added to the sitemap as they are completed.
-- Home includes a generated 1200 × 630 branded social image at `/opengraph-image`.
+- A production build with `SITE_URL` configured permits indexing and publishes canonical URLs and sitemap entries for Home and About. Home includes Person, WebSite, and Book structured data; About includes AboutPage and Person structured data. Add other pages to the sitemap as they are completed.
+- Both pages use the generated 1200 × 630 branded social image at `/opengraph-image`.
 
 After production launch, verify the domain in Google Search Console, inspect Home, submit `/sitemap.xml`, and monitor indexing and real-user Core Web Vitals. These account actions are not performed by the local build.
